@@ -1,55 +1,50 @@
-# Prerequisites
-*.d
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+int main ()
+{
+    int guess, random;
+    int num_of_guess = 0;
 
-# Linker output
-*.ilk
-*.map
-*.exp
+    // Seed the random number generator using the current time
+    srand(time(NULL));
 
-# Precompiled Headers
-*.gch
-*.pch
+    printf("Welcome to the world of number guessing!\n");
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+    // Generate a random number between 1 and 100 (inclusive)
+    random = (rand() % 100) + 1;
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+    do
+    {
+        printf("\nEnter a number from 1 to 100: ");
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+        // Check if the input is a valid integer
+        if (scanf("%d", &guess) != 1) {
+            printf("Invalid input! Please enter a number.\n");
+            // Clear the input buffer to prevent an infinite loop
+            while (getchar() != '\n');
+            continue; // Skip the rest of the loop iteration
+        }
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+        num_of_guess++; // Increment the guess counter
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+        if (guess < random)
+        {
+            printf("Guess a larger number.\n");
+        }
+        else if (guess > random) // Condition added here
+        {
+            printf("Guess a smaller number.\n");
+        }
+        else
+        {
+            printf("Congratulations!! You successfully guessed the number in %d attempts.\n", num_of_guess);
+        }
+    } while(guess != random);
 
-# debug information files
-*.dwo
+    printf("\nThanks for playing.\n");
+    printf("Developer: Kazim Ali\n");
+
+    return 0;
+}
